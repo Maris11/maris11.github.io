@@ -9,11 +9,8 @@ $(document).ready(function() {
             $('.error').text('')
 
             $.ajax({
-                url: 'https://bc23-87-110-66-230.ngrok-free.app/',
+                url: 'https://f8bf-87-110-68-15.ngrok-free.app/',
                 method: 'POST',
-                headers: {
-                    'ngrok-skip-browser-warning': '1'
-                },
                 data: abstract,
                 beforeSend: function() {
                     $('#check-btn, #input-abstract').prop('disabled', true).css('opacity', 0.4);
