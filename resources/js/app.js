@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    let selectedLanguage = 'latvian'
+    let selectedLanguage = $('.selected').attr('id');
 
     $('#check-btn').click(function() {
         let abstract = $('#input-abstract').val();
