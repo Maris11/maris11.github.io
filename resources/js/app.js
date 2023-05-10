@@ -130,7 +130,6 @@ $(document).ready(function() {
     const languageSelector = document.getElementById('language-selector');
     languageSelector.addEventListener('change', function() {
         const selectedLanguage = languageSelector.value;
-        alert(location.hostname)
         window.location.href = `/${selectedLanguage}/index.html`;
     });
 });
