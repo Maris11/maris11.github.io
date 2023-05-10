@@ -54,3 +54,16 @@ h1 {
 #language-selector option {
     background-color: #083d3c;
 }
+
+.abst-lang {
+    opacity: 0.5;
+}
+
+.abst-lang:hover {
+    opacity: 1;
+}
+
+.abst-lang.selected {
+    border: 2px solid white;
+    opacity: 1;
+}

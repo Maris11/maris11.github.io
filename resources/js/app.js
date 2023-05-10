@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    let selectedLanguage = 'latvian'
+
     $('#check-btn').click(function() {
         let abstract = $('#input-abstract').val();
 
@@ -11,7 +13,7 @@ $(document).ready(function() {
             $.ajax({
                 url: 'https://40cf-87-246-145-99.ngrok-free.app',
                 method: 'POST',
-                data: abstract,
+                data: JSON.stringify([selectedLanguage, abstract]),
                 beforeSend: function() {
                     $('#check-btn, #input-abstract').prop('disabled', true).css('opacity', 0.4);
                 },
@@ -37,7 +39,7 @@ $(document).ready(function() {
                     }
                 },
                 complete: function() {
-                    $('#check-btn, #input-abstract').prop('disabled', false).css('opacity', 1);;
+                    $('#check-btn, #input-abstract').prop('disabled', false).css('opacity', 1);
                 }
             });
         }
@@ -125,6 +127,12 @@ $(document).ready(function() {
             removeElementsWithClass('scale-color')
             createColorScale()
         }
+    });
+
+    $('.abst-lang').on('click', function(lang) {
+        selectedLanguage = $(this).attr('id')
+        $('.abst-lang').removeClass('selected')
+        $(this).addClass('selected')
     });
 
     const languageSelector = document.getElementById('language-selector');
