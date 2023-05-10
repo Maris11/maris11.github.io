@@ -9,7 +9,7 @@ $(document).ready(function() {
             $('.error').text('')
 
             $.ajax({
-                url: 'https://f8bf-87-110-68-15.ngrok-free.app/',
+                url: 'https://40cf-87-246-145-99.ngrok-free.app',
                 method: 'POST',
                 data: abstract,
                 beforeSend: function() {
@@ -125,5 +125,12 @@ $(document).ready(function() {
             removeElementsWithClass('scale-color')
             createColorScale()
         }
+    });
+
+    const languageSelector = document.getElementById('language-selector');
+    languageSelector.addEventListener('change', function() {
+        const selectedLanguage = languageSelector.value;
+        alert(location.hostname)
+        window.location.href = `/${selectedLanguage}/index.html`;
     });
 });

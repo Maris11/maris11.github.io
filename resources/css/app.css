@@ -8,6 +8,7 @@ body {
     color: white !important;
     text-align: justify;
     line-height: 1.5;
+    height: 50vh
 }
 
 h1 {
@@ -39,4 +40,17 @@ h1 {
 .error {
     color: rgba(255, 196, 0, 1);
     font-weight: bold;
+}
+
+#language-selector {
+    background-color: transparent;
+    color: white;
+    font-size: 1.4vw;
+    border: none;
+    outline: none;
+    font-weight: bold;
+}
+
+#language-selector option {
+    background-color: #083d3c;
 }

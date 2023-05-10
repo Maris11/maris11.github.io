@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Abstract checker</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
+    <script src="../resources/js/jquery.js"></script>
+    <link rel="stylesheet" href="../resources/css/app.css">
+</head>
+<body>
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-7">
+      <div class="input-group mb-3">
+        <select id="language-selector">
+          <option value="en">EN</option>
+          <option value="lv">LV</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <h1 class="text-center mb-4">Is the abstract generated with ChatGPT?</h1>
+
+  <div class="row justify-content-center">
+    <div class="col-md-7">
+      <div class="input-group mb-3">
+        <textarea class="form-control" style="height: 50vh" placeholder="Input the abstract..." id="input-abstract"></textarea>
+        <button class="btn btn-primary" type="button" id="check-btn">Check</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-center mb-2">
+    <div class="col-md-7 error"></div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-md-7">
+      Probability that a sentence is generated:
+    </div>
+  </div>
+
+  <div class="row justify-content-center mt-2 mb-3">
+    <div class="col-md-7">
+      <div class="row">
+        <div class="col-auto">
+          0%
+        </div>
+        <div class="col"><div class="row" id="color-scale"></div></div>
+        <div class="col-auto">
+          100%
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-center mb-3">
+    <div class="col-md-7">
+      Total probability: <span id="average-percentage">-%</span>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-md-7" id="sentences">
+        <div class="row text-center border-bottom pb-2">
+            <div class="col-md-1">No.</div>
+            <div class="col-md-11">Abstract sentence</div>
+        </div>
+    </div>
+  </div>
+</div>
+<script src="../resources/js/app.js"></script>
+</body>
+</html>
+

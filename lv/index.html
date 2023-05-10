@@ -4,14 +4,25 @@
     <title>Anotācijas pārbaudītājs</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="resources/css/bootstrap.min.css">
-<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>-->
-    <script src="resources/js/jquery.js"></script>
-    <link rel="stylesheet" href="resources/css/app.css">
+    <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
+    <script src="../resources/js/jquery.js"></script>
+    <link rel="stylesheet" href="../resources/css/app.css">
 </head>
 <body>
 <div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-7">
+      <div class="input-group mb-3">
+        <select id="language-selector">
+          <option value="lv">LV</option>
+          <option value="en">EN</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
   <h1 class="text-center mb-4">Vai anotācija ir ģenerēta ar ChatGPT?</h1>
+
   <div class="row justify-content-center">
     <div class="col-md-7">
       <div class="input-group mb-3">
@@ -60,7 +71,7 @@
     </div>
   </div>
 </div>
-<script src="resources/js/app.js"></script>
+<script src="../resources/js/app.js"></script>
 </body>
 </html>
 
