@@ -1,5 +1,18 @@
 $(document).ready(function() {
     let selectedLanguage = $('.selected').attr('id');
+    let light_mode = false;
+
+    $('#dark-mode').change(function() {
+        if(this.checked) {
+            $('body').removeClass('light')
+            light_mode = false
+            createColorScale(false)
+        } else {
+            $('body').addClass('light')
+            light_mode = true
+            createColorScale(true)
+        }
+    })
 
     $('#check-btn').click(function() {
         let abstract = $('#input-abstract').val();
@@ -22,14 +35,18 @@ $(document).ready(function() {
                     console.log(response)
                     removeElementsWithClass('sentence')
                     let average = 0
+                    let wordCount = 0
+                    let allWordCount = 0
 
                     for(let i = 0; i < response[0].length; i++) {
                         addSentence(i + 1, response[0][i], response[1][i])
-                        average += parseFloat(response[1][i])
+                        wordCount = response[0][i].split(" ").length
+                        allWordCount += wordCount
+                        average += response[1][i] * wordCount
                     }
 
-                    average = (average/response[0].length).toFixed(1)
-                    $('#average-percentage').text(average + '%').css('color', getColorScale(average))
+                    average = (average/allWordCount).toFixed(1)
+                    $('#average-percentage').text(average + '%').css('color', getColorScale(average, light_mode))
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     if (textStatus === 'error' && jqXHR.status === 0) {
@@ -73,7 +90,7 @@ $(document).ready(function() {
 
         // Create the second column with the sentence
         var sentenceCol = $('<div class="col-md-11" title="' + percentage + '%">' + sentence + '</div>');
-        sentenceCol.css('color', getColorScale(percentage))
+        sentenceCol.css('color', getColorScale(percentage, light_mode))
 
         // Add both columns to the row
         row.append(indexCol);
@@ -82,14 +99,28 @@ $(document).ready(function() {
         $('#sentences').append(row)
     }
 
-    function getColorScale(percentage) {
-        const colorStops = [
-            { percent: 0, color: '#1ba21b' },
-            { percent: 20, color: '#7FFF00' },
-            { percent: 50, color: '#FFFF00' },
-            { percent: 80, color: '#FF7F00' },
-            { percent: 100, color: '#FF0000' }
-        ];
+    function getColorScale(percentage, light) {
+        let colorStops;
+
+        if(light) {
+            colorStops = [
+                { percent: 0, color: '#134413' },
+                { percent: 15, color: '#027217' },
+                { percent: 30, color: '#8bb23e' },
+                { percent: 50, color: '#bdbd00' },
+                { percent: 80, color: '#bd6100' },
+                { percent: 100, color: '#b00000' }
+            ];
+        }
+        else {
+            colorStops = [
+                { percent: 0, color: '#1ba239' },
+                { percent: 20, color: '#7FFF00' },
+                { percent: 50, color: '#FFFF00' },
+                { percent: 80, color: '#FF7F00' },
+                { percent: 100, color: '#FF0000' }
+            ];
+        }
 
         let color;
         for (let i = 1; i < colorStops.length; i++) {
@@ -111,21 +142,21 @@ $(document).ready(function() {
     var container = $('#color-scale')
     var width = container.width()
 
-    function createColorScale() {
+    function createColorScale(light) {
+        removeElementsWithClass('scale-color')
         for (var i = 0; i <= 100; i++) {
-            var color = getColorScale(i);
+            var color = getColorScale(i, light);
             var el = $('<div class="scale-color">').css('background-color', color).css('width', container.width()/102);
             container.append(el);
         }
     }
 
-    createColorScale()
+    createColorScale(light_mode)
 
     $(window).on('resize', function() {
         if(container.width() !== width) {
             width = container.width()
-            removeElementsWithClass('scale-color')
-            createColorScale()
+            createColorScale(light_mode)
         }
     });
 
