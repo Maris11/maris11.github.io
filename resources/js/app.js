@@ -1,5 +1,6 @@
 $(document).ready(function() {
-    let selectedLanguage = $('.selected').attr('id');
+    let selectedLanguage = 'auto'
+    let pageLanguage = $('.page-lang').val()
     let light_mode = false;
 
     $('#dark-mode').change(function() {
@@ -18,7 +19,7 @@ $(document).ready(function() {
         let abstract = $('#input-abstract').val();
 
         if (!abstract.trim()) {
-            error("Ievadiet anotāciju!")
+            error(pageLanguage === 'lv' ? "Ievadiet anotāciju!" : "Enter an abstract!")
         }
         else {
             $('.error').text('')
@@ -46,13 +47,30 @@ $(document).ready(function() {
                     }
 
                     average = (average/allWordCount).toFixed(1)
+                    $('#det-lang').text(response[2].substring(0, 3).toUpperCase())
                     $('#average-percentage').text(average + '%').css('color', getColorScale(average, light_mode))
+                    let class_text = ''
+
+                    if (average >= 0 && average < 40) {
+                        class_text = pageLanguage === 'lv' ? '(nav ģenerēta ar ChatGPT)' : '(not generated with ChatGPT)'
+                    }
+                    else if (average >= 40 && average < 50) {
+                        class_text = pageLanguage === 'lv' ? '(grūti pateikt, bet drīzāk nav ģenerēta ar ChatGPT)' : '(hard to tell, but likely not generated with ChatGPT)'
+                    }
+                    else if (average >= 50 && average < 60) {
+                        class_text = pageLanguage === 'lv' ? '(grūti pateikt, bet drīzāk ir ģenerēta ar ChatGPT)' : '(hard to tell, but likely generated with ChatGPT)'
+                    }
+                    else {
+                        class_text = pageLanguage === 'lv' ? '(ir ģenerēta ar ChatGPT)' : '(generated with ChatGPT)'
+                    }
+
+                    $('#class').text(class_text)
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     if (textStatus === 'error' && jqXHR.status === 0) {
-                        error('Serveris ir bezsaistē.', true);
+                        error(pageLanguage === 'lv' ? 'Serveris ir bezsaistē.' : "The server is offline.", true);
                     } else {
-                        error('Nezināma kļūda.', true);
+                        error(pageLanguage === 'lv' ? 'Nezināma kļūda.' : 'Unknown error.', true);
                     }
                 },
                 complete: function() {
@@ -66,7 +84,7 @@ $(document).ready(function() {
         let errorContainer = $('.error')
 
         if (contact) {
-            text = text + " Sazinieties ar lapas īpašnieku mariscinis@gmail.com"
+            text = text + (pageLanguage === 'lv' ?" Sazinieties ar lapas īpašnieku mariscinis@gmail.com" : " Contact the owner of the page mariscinis@gmail.com")
         }
 
         errorContainer.text(text)
@@ -106,9 +124,9 @@ $(document).ready(function() {
             colorStops = [
                 { percent: 0, color: '#134413' },
                 { percent: 15, color: '#027217' },
-                { percent: 30, color: '#8bb23e' },
-                { percent: 50, color: '#bdbd00' },
-                { percent: 80, color: '#bd6100' },
+                { percent: 30, color: '#64812d' },
+                { percent: 50, color: '#967d0c' },
+                { percent: 80, color: '#9a4e01' },
                 { percent: 100, color: '#b00000' }
             ];
         }
@@ -160,15 +178,11 @@ $(document).ready(function() {
         }
     });
 
-    $('.abst-lang').on('click', function(lang) {
-        selectedLanguage = $(this).attr('id')
-        $('.abst-lang').removeClass('selected')
-        $(this).addClass('selected')
+    $('.abst-lang').on('change', function() {
+        selectedLanguage = $(this).val()
     });
 
-    const languageSelector = document.getElementById('language-selector');
-    languageSelector.addEventListener('change', function() {
-        const selectedLanguage = languageSelector.value;
-        window.location.href = `/${selectedLanguage}/index.html`;
+    $('.page-lang').on('change', function() {
+        window.location.href = "/" + $(this).val() +"/index.html";
     });
 });

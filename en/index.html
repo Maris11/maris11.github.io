@@ -13,11 +13,22 @@
   <div class="row justify-content-center">
     <div class="col-md-7">
       <div class="row mb-3">
-        <div class="col-auto" id="language-selector-container">
-          <select id="language-selector" title="Page language">
-            <option value="en">EN</option>
-            <option value="lv">LV</option>
-          </select>
+        <div class="col-auto language-selector-container">
+          <label>
+            <select class="language-selector page-lang">
+              <option value="en">EN</option>
+              <option value="lv">LV</option>
+            </select>
+          </label>
+        </div>
+        <div class="col-auto language-selector-container">
+          <label> Abstract language:
+            <select class="language-selector abst-lang">
+              <option value="auto">AUTO</option>
+              <option value="english">EN</option>
+              <option value="latvian">LV</option>
+            </select>
+          </label>
         </div>
         <div class="col-auto" id="dark-mode-container">
           <div class="float-left mr-2">Dark mode:</div>
@@ -31,15 +42,6 @@
   </div>
 
   <h1 class="text-center mb-4">Is the abstract generated with ChatGPT?</h1>
-
-  <div class="row justify-content-center mb-3">
-    <div class="col-1">
-      <img src="../resources/images/flag_uk.svg" class="abst-lang selected" id="english" title="Abstract language" alt="">
-    </div>
-    <div class="col-1">
-      <img src="../resources/images/flag_lv.svg" class="abst-lang" id="latvian" title="Abstract language" alt="">
-    </div>
-  </div>
 
   <div class="row justify-content-center">
     <div class="col-md-7">
@@ -76,7 +78,13 @@
 
   <div class="row justify-content-center mb-3">
     <div class="col-md-7">
-      Total probability: <span id="average-percentage">-%</span>
+      Language: <span id="det-lang">-</span>
+    </div>
+  </div>
+
+  <div class="row justify-content-center mb-3">
+    <div class="col-md-7">
+      Total probability: <span id="average-percentage">-%</span> <span id="class"></span>
     </div>
   </div>
 

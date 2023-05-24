@@ -36,30 +36,18 @@ body {
     border-bottom: 2px solid white;
 }
 
-#language-selector {
+.language-selector {
     background-color: transparent;
     color: white;
     font-size: 20px;
     border: none;
     outline: none;
     font-weight: bold;
+    text-align: center;
 }
 
-#language-selector option {
+.language-selector option {
     background-color: #083d3c;
-}
-
-.abst-lang {
-    opacity: 0.5;
-}
-
-.abst-lang:hover {
-    opacity: 1;
-}
-
-.abst-lang.selected {
-    border: 2px solid white;
-    opacity: 1;
 }
 
 .switch {
@@ -131,11 +119,11 @@ input:checked + .slider:before {
     color: black !important;
 }
 
-.light #language-selector {
+.light .language-selector {
     color: black;
 }
 
-.light #language-selector option {
+.light .language-selector option {
     background-color: white;
 }
 
@@ -150,4 +138,8 @@ input:checked + .slider:before {
 
 .light #response {
     border-bottom: 2px solid black;
+}
+
+.light .error {
+    color: red
 }
