@@ -25,7 +25,7 @@ $(document).ready(function() {
             $('.error').text('')
 
             $.ajax({
-                url: 'https://40cf-87-246-145-99.ngrok-free.app',
+                url: 'https://4d3e-84-237-254-61.ngrok-free.app',
                 method: 'POST',
                 data: JSON.stringify([selectedLanguage, abstract]),
                 beforeSend: function() {
